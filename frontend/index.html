@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Expense Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= AUTH PAGE ================= -->
+
+<div id="authPage" class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="logo">💰</div>
+
+        <h1>Student Expense Tracker</h1>
+
+        <p>Manage your money smarter</p>
+
+        <div class="auth-tabs">
+
+            <button id="loginTab" class="active">
+                Login
+            </button>
+
+            <button id="registerTab">
+                Register
+            </button>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <div id="loginForm">
+
+            <input
+                id="loginUsername"
+                type="text"
+                placeholder="Username"
+                autocomplete="username"
+            >
+
+            <input
+                id="loginPassword"
+                type="password"
+                placeholder="Password"
+                autocomplete="current-password"
+            >
+
+            <button id="loginBtn" class="auth-btn">
+                Login
+            </button>
+
+            <div id="loginMessage" class="message"></div>
+
+        </div>
+
+
+        <!-- REGISTER -->
+
+        <div id="registerForm" class="hidden">
+
+            <input
+                id="registerUsername"
+                type="text"
+                placeholder="Choose username"
+                autocomplete="username"
+            >
+
+            <input
+                id="registerPassword"
+                type="password"
+                placeholder="Choose password"
+                autocomplete="new-password"
+            >
+
+            <input
+                id="confirmPassword"
+                type="password"
+                placeholder="Confirm password"
+                autocomplete="new-password"
+            >
+
+            <button id="registerBtn" class="auth-btn">
+                Create Account
+            </button>
+
+            <div id="registerMessage" class="message"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= APP PAGE ================= -->
+
+<div id="appPage" class="hidden">
+
+    <div class="app-layout">
+
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+
+                <span>💰</span>
+
+                <strong>
+                    Expense Tracker
+                </strong>
+
+            </div>
+
+
+            <nav>
+
+                <button
+                    class="nav-btn active"
+                    data-section="dashboardSection">
+
+                    🏠 Dashboard
+
+                </button>
+
+
+                <button
+                    class="nav-btn"
+                    data-section="transactionSection">
+
+                    📋 Transactions
+
+                </button>
+
+
+                <button
+                    class="nav-btn"
+                    data-section="budgetSection">
+
+                    💰 Budget
+
+                </button>
+
+
+                <button
+                    class="nav-btn"
+                    data-section="goalSection">
+
+                    🎯 Savings Goal
+
+                </button>
+
+
+                <button
+                    class="nav-btn"
+                    data-section="statisticsSection">
+
+                    📊 Statistics
+
+                </button>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <button id="darkModeBtn">
+                    🌙 Dark Mode
+                </button>
+
+                <button id="logoutBtn">
+                    🚪 Logout
+                </button>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- ================= MAIN ================= -->
+
+        <main class="main-content">
+
+
+            <!-- TOPBAR -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>
+                        Dashboard
+                    </h1>
+
+                    <p id="welcomeText">
+                        Welcome back!
+                    </p>
+
+                </div>
+
+
+                <div class="user-box">
+
+                    <span>
+                        👤
+                    </span>
+
+                    <strong id="currentUser">
+                        User
+                    </strong>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- ================= DASHBOARD ================= -->
+
+            <section id="dashboardSection">
+
+                <div class="month-selector">
+
+                    <label>
+                        📅 View Month
+                    </label>
+
+                    <select id="monthFilter">
+
+                        <option value="All">
+                            All Months
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="dashboard-cards">
+
+
+                    <div class="summary-card balance">
+
+                        <div class="card-icon">
+                            💵
+                        </div>
+
+                        <div>
+
+                            <small>
+                                Balance
+                            </small>
+
+                            <h2 id="balance">
+                                ৳ 0
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="summary-card income">
+
+                        <div class="card-icon">
+                            📈
+                        </div>
+
+                        <div>
+
+                            <small>
+                                Total Income
+                            </small>
+
+                            <h2 id="income">
+                                ৳ 0
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="summary-card expense">
+
+                        <div class="card-icon">
+                            📉
+                        </div>
+
+                        <div>
+
+                            <small>
+                                Total Expense
+                            </small>
+
+                            <h2 id="expense">
+                                ৳ 0
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= ADD TRANSACTION ================= -->
+
+            <section class="section-box">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <h2>
+                            ➕ Add Transaction
+                        </h2>
+
+                        <p>
+                            Record your income or expense
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="input-group">
+
+                        <label>
+                            Description
+                        </label>
+
+                        <input
+                            id="description"
+                            type="text"
+                            placeholder="e.g. Lunch, Salary"
+                        >
+
+                    </div>
+
+
+
+                    <div class="input-group">
+
+                        <label>
+                            Amount
+                        </label>
+
+                        <input
+                            id="amount"
+                            type="number"
+                            placeholder="+ Income / - Expense"
+                        >
+
+                    </div>
+
+
+
+                    <div class="input-group">
+
+                        <label>
+                            Category
+                        </label>
+
+                        <select id="category">
+
+                            <option value="">
+                                Select Category
+                            </option>
+
+                            <option value="Food">
+                                🍔 Food
+                            </option>
+
+                            <option value="Transport">
+                                🚗 Transport
+                            </option>
+
+                            <option value="Education">
+                                📚 Education
+                            </option>
+
+                            <option value="Shopping">
+                                🛍️ Shopping
+                            </option>
+
+                            <option value="Other">
+                                📦 Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="input-group">
+
+                        <label>
+                            Date
+                        </label>
+
+                        <input
+                            id="date"
+                            type="date"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="addBtn"
+                    class="primary-btn">
+
+                    Add Transaction
+
+                </button>
+
+            </section>
+
+
+
+            <!-- ================= BUDGET ================= -->
+
+            <section
+                id="budgetSection"
+                class="section-box">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <h2>
+                            💰 Monthly Budget
+                        </h2>
+
+                        <p>
+                            Set spending limits for this month
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="input-group">
+
+                        <label>
+                            Category
+                        </label>
+
+                        <select id="budgetCategory">
+
+                            <option value="">
+                                Select Category
+                            </option>
+
+                            <option value="Food">
+                                🍔 Food
+                            </option>
+
+                            <option value="Transport">
+                                🚗 Transport
+                            </option>
+
+                            <option value="Education">
+                                📚 Education
+                            </option>
+
+                            <option value="Shopping">
+                                🛍️ Shopping
+                            </option>
+
+                            <option value="Other">
+                                📦 Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="input-group">
+
+                        <label>
+                            Budget Amount
+                        </label>
+
+                        <input
+                            id="budgetAmount"
+                            type="number"
+                            placeholder="Enter budget"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="setBudgetBtn"
+                    class="primary-btn">
+
+                    Set Budget
+
+                </button>
+
+
+                <div
+                    id="budgetList"
+                    class="budget-list">
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= SAVINGS GOAL ================= -->
+
+            <section
+                id="goalSection"
+                class="section-box">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <h2>
+                            🎯 Savings Goal
+                        </h2>
+
+                        <p>
+                            Track your savings progress
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="goal-form">
+
+                    <input
+                        id="savingsGoal"
+                        type="number"
+                        placeholder="Enter savings goal"
+                    >
+
+                    <button
+                        id="setGoalBtn"
+                        class="primary-btn">
+
+                        Set Goal
+
+                    </button>
+
+                </div>
+
+
+                <div class="goal-info">
+
+
+                    <div>
+
+                        <small>
+                            Goal
+                        </small>
+
+                        <strong id="goalAmount">
+                            ৳ 0
+                        </strong>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <small>
+                            Saved
+                        </small>
+
+                        <strong id="savedAmount">
+                            ৳ 0
+                        </strong>
+
+                    </div>
+
+
+
+                    <div>
+
+                        <small>
+                            Remaining
+                        </small>
+
+                        <strong id="remainingAmount">
+                            ৳ 0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="progress">
+
+                    <div
+                        id="goalProgressBar">
+                    </div>
+
+                </div>
+
+
+                <p
+                    id="goalMessage"
+                    class="goal-message">
+
+                    Set a savings goal to start.
+
+                </p>
+
+            </section>
+
+
+
+            <!-- ================= STATISTICS ================= -->
+
+            <section
+                id="statisticsSection"
+                class="section-box">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <h2>
+                            📊 Expense Statistics
+                        </h2>
+
+                        <p>
+                            See where your money is going
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="statistics"
+                    class="statistics">
+                </div>
+
+
+                <h3 class="sub-heading">
+                    Category-wise Expense
+                </h3>
+
+
+                <div
+                    id="chart"
+                    class="chart">
+                </div>
+<h3 class="sub-heading">
+    Expense Breakdown
+</h3>
+
+<div class="pie-chart-card">
+    <canvas id="categoryPieChart"></canvas>
+</div>
+
+                <h3 class="sub-heading">
+                    Income vs Expense
+                </h3>
+
+
+                <div class="comparison-chart">
+
+
+                    <div class="compare-row">
+
+                        <span>
+                            📈 Income
+                        </span>
+
+                        <div class="compare-track">
+
+                            <div
+                                id="incomeBar">
+                            </div>
+
+                        </div>
+
+                        <strong
+                            id="incomeChartAmount">
+                            ৳ 0
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="compare-row">
+
+                        <span>
+                            📉 Expense
+                        </span>
+
+                        <div class="compare-track">
+
+                            <div
+                                id="expenseBar">
+                            </div>
+
+                        </div>
+
+                        <strong
+                            id="expenseChartAmount">
+                            ৳ 0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= TRANSACTIONS ================= -->
+
+            <section
+                id="transactionSection"
+                class="section-box">
+
+
+                <div class="history-header">
+
+
+                    <div>
+
+                        <h2>
+                            📋 Transaction History
+                        </h2>
+
+                        <p>
+                            Your recorded transactions
+                        </p>
+
+                    </div>
+
+
+                    <div class="history-actions">
+
+                        <button
+                            id="exportBtn"
+                            class="success-btn">
+
+                            📥 Export CSV
+
+                        </button>
+
+
+                        <button
+                            id="clearAllBtn"
+                            class="danger-btn">
+
+                            🗑️ Clear All
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="filter-section">
+
+
+                    <input
+                        id="searchInput"
+                        type="text"
+                        placeholder="🔍 Search transaction..."
+                    >
+
+
+                    <select id="filterCategory">
+
+                        <option value="All">
+                            All Categories
+                        </option>
+
+                        <option value="Food">
+                            🍔 Food
+                        </option>
+
+                        <option value="Transport">
+                            🚗 Transport
+                        </option>
+
+                        <option value="Education">
+                            📚 Education
+                        </option>
+
+                        <option value="Shopping">
+                            🛍️ Shopping
+                        </option>
+
+                        <option value="Other">
+                            📦 Other
+                        </option>
+
+                    </select>
+
+
+                    <select id="filterType">
+
+                        <option value="All">
+                            All Transactions
+                        </option>
+
+                        <option value="Income">
+                            📈 Income
+                        </option>
+
+                        <option value="Expense">
+                            📉 Expense
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <ul id="transactionList"></ul>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= TOAST ================= -->
+
+<div id="toast" class="toast"></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

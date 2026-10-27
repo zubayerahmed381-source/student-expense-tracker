@@ -1,0 +1,117 @@
+### =========================================
+### 1. REGISTER NEW TEST USER
+### =========================================
+
+POST http://localhost:8080/student-expense-tracker-backend/api/register
+Content-Type: application/x-www-form-urlencoded
+
+username=zubayer_test&password=Test@12345
+
+
+### =========================================
+### 2. LOGIN
+### =========================================
+
+POST http://localhost:8080/student-expense-tracker-backend/api/login
+Content-Type: application/x-www-form-urlencoded
+
+username=zubayer_test&password=Test@12345
+
+
+### =========================================
+### 3. ADD EXPENSE
+### =========================================
+
+POST http://localhost:8080/student-expense-tracker-backend/api/transactions
+Content-Type: application/x-www-form-urlencoded
+
+description=Lunch&amount=-200&category=Food&transactionDate=2026-09-09
+
+
+### =========================================
+### 4. ADD INCOME
+### =========================================
+
+POST http://localhost:8080/student-expense-tracker-backend/api/transactions
+Content-Type: application/x-www-form-urlencoded
+
+description=Tuition Income&amount=5000&category=Education&transactionDate=2026-09-09
+
+
+### =========================================
+### 5. GET ALL TRANSACTIONS
+### =========================================
+
+GET http://localhost:8080/student-expense-tracker-backend/api/transactions
+
+
+### =========================================
+### 6. DELETE TRANSACTION
+### =========================================
+### Change id=1 to the actual transaction ID
+
+DELETE http://localhost:8080/student-expense-tracker-backend/api/transactions?id=48
+### =========================================
+### =========================================
+### 7. UPDATE TRANSACTION
+### =========================================
+
+POST http://localhost:8080/student-expense-tracker-backend/api/transactions/update
+Content-Type: application/x-www-form-urlencoded
+
+id=21&description=Updated Tuition Income&amount=6000&category=Education&transactionDate=2026-09-09
+
+### =========================================
+### 8. SAVE BUDGET
+### =========================================
+
+POST http://localhost:8080/student-expense-tracker-backend/api/budget
+Content-Type: application/x-www-form-urlencoded
+
+budgetMonth=2026-09-01&amount=10000
+### =========================================
+### 9. GET BUDGET
+### =========================================
+
+GET http://localhost:8080/student-expense-tracker-backend/api/budget?month=2026-09-01
+### =========================================
+### 10. SAVE SAVINGS GOAL
+### =========================================
+
+POST http://localhost:8080/student-expense-tracker-backend/api/savings-goal
+Content-Type: application/x-www-form-urlencoded
+
+goalAmount=50000
+### =========================================
+### 11. GET SAVINGS GOAL
+### =========================================
+
+GET http://localhost:8080/student-expense-tracker-backend/api/savings-goal
+### =========================================
+### 12. LOGOUT
+### =========================================
+
+POST http://localhost:8080/student-expense-tracker-backend/api/logout
+### =========================================
+### 13. CLEAR ALL TRANSACTIONS
+### =========================================
+
+POST http://localhost:8080/student-expense-tracker-backend/api/transactions/clear
+
+### SAVE SAVINGS GOAL
+POST http://localhost:8080/student-expense-tracker-backend/api/savings-goal
+Content-Type: application/x-www-form-urlencoded
+
+goalAmount=50000
+
+### GET BUDGET
+GET http://localhost:8080/student-expense-tracker-backend/api/budget?month=2026-10-01 
+
+### SAVE BUDGET
+POST http://localhost:8080/student-expense-tracker-backend/api/budget
+Content-Type: application/x-www-form-urlencoded
+
+budgetMonth=2026-10-01&amount=10000
+
+### GET BUDGET
+GET http://localhost:8080/student-expense-tracker-backend/api/budget?month=2026-10-01
